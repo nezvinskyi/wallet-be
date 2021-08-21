@@ -4,7 +4,7 @@ const swaggerOptions = {
     info: {
       title: 'Contacts API',
       version: '1.0.0',
-      description: 'Contacts API information',
+      description: 'Wallet API information',
       contact: {
         name: 'Blended2-team',
       },
