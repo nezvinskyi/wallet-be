@@ -1,6 +1,7 @@
-const { Transaction } = require('../../model');
+const { Transaction } = require('../../models');
 
 const addTransaction = async (req, res, next) => {
+  // req.user._id
   try {
     const result = await Transaction.create(req.body);
     res.status(201).json(result);

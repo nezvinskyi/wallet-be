@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { transactions: ctrl } = require('../controllers');
+const authMiddleware = require('../middlewares/auth');
 
 /**
  * @swagger
@@ -11,12 +12,13 @@ const { transactions: ctrl } = require('../controllers');
  *      '200':
  *        description: A successful response
  */
-router.post('/', ctrl.addTransaction);
+router.post('/', authMiddleware, ctrl.addTransaction);
+
 /**
  * @swagger
  * /api/v1/transactions/:transactionId:
  *  delete:
- *    description: Use to post one transaction
+ *    description: Use to delete one transaction by id
  *    responses:
  *      '200':
  *        description: A successful response
