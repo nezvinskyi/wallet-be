@@ -9,6 +9,7 @@ const { user: ctrl } = require('../controllers');
  * /api/v1/users/signup:
  *  post:
  *    description: Use for user registration
+ *    tags: [Users]
  *    responses:
  *      '200':
  *        description: A successful response
@@ -20,6 +21,7 @@ router.post('/signup', ctrl.signup);
  * /api/v1/users/login:
  *  post:
  *    description: Use to login user
+ *    tags: [Users]
  *    responses:
  *      '200':
  *        description: A successful response
@@ -31,6 +33,7 @@ router.post('/login', ctrl.login);
  * /api/v1/users/logout:
  *  get:
  *    description: Use to logout user
+ *    tags: [Users]
  *    responses:
  *      '200':
  *        description: A successful response
@@ -42,6 +45,7 @@ router.get('/logout', authMiddleware, ctrl.logout);
  * /api/v1/users/current:
  *  get:
  *    description: Use to get current user information
+ *    tags: [Users]
  *    responses:
  *      '200':
  *        description: A successful response
@@ -53,6 +57,7 @@ router.get('/current', authMiddleware, ctrl.getCurrentUser);
  * /api/v1/users:
  *  patch:
  *    description: Use to update user information (name, password, email)
+ *    tags: [Users]
  *    responses:
  *      '200':
  *        description: A successful response

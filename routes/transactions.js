@@ -8,6 +8,7 @@ const authMiddleware = require('../middlewares/auth');
  * /api/v1/transactions:
  *  post:
  *    description: Use to post one transaction
+ *    tags: [transactions]
  *    responses:
  *      '200':
  *        description: A successful response
@@ -19,6 +20,7 @@ router.post('/', authMiddleware, ctrl.addTransaction);
  * /api/v1/transactions/:transactionId:
  *  delete:
  *    description: Use to delete one transaction by id
+ *    tags: [transactions]
  *    responses:
  *      '200':
  *        description: A successful response
