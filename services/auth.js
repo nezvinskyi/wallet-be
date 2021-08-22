@@ -1,8 +1,8 @@
 const { User } = require('../model');
 
-const getById = (id) => User.findById(id);
+const getById = id => User.findById(id);
 
-const getOne = (filter) => {
+const getOne = filter => {
   return User.findOne(filter);
 };
 
@@ -13,7 +13,7 @@ const addUser = ({ email, password, name }) => {
 };
 
 const updateById = (id, updateInfo) => {
-  return User.findByIdAndUpdate(id, updateInfo);
+  return User.findByIdAndUpdate(id, updateInfo, { new: true });
 };
 
 module.exports = {

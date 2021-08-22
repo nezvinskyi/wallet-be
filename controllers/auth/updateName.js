@@ -5,7 +5,7 @@ const updateName = async (req, res, next) => {
   const {
     body,
     user: { _id: id },
-  } = req
+  } = req;
   try {
     const updatedUser = await service.updateById(id, body);
 
@@ -13,11 +13,11 @@ const updateName = async (req, res, next) => {
       status: 'Success',
       code: HTTP_STATUS.OK,
       data: {
-        updatedUser,
+        user: updatedUser,
       },
-    })
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
