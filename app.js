@@ -5,7 +5,9 @@ const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const { swaggerOptions } = require('./config');
-const { transactionsRoutes, categoriesRoutes } = require('./routes');
+const { transactionsRoutes, categoriesRoutes, usersRoutes } = require('./routes');
+
+require('./config/config-passport')
 
 const app = express();
 
