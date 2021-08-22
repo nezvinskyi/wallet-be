@@ -8,20 +8,11 @@ const transactionSchema = Schema(
       default: Date.now,
     },
     type: { type: String },
-    category: {
-      type: String,
-      enum: [
-        'Продукты',
-        'Машина',
-        'Забота о себе',
-        'Забота о детях',
-        'Товары для дома',
-        'Образование',
-        'Досуг',
-        'Другие расходы',
-      ],
-      required: [true, 'Category is required'],
-    },
+    category: [
+      {
+        type: Schema.Types.ObjectId,
+      },
+    ],
     comments: { type: String },
     amount: {
       type: Number,

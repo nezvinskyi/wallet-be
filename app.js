@@ -5,7 +5,7 @@ const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const { swaggerOptions } = require('./config');
-const { transactionsRoutes } = require('./routes');
+const { transactionsRoutes, categoriesRoutes } = require('./routes');
 
 const app = express();
 
@@ -19,6 +19,7 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/api/v1/transactions', transactionsRoutes);
+app.use('/api/v1/categories', categoriesRoutes);
 // app.get('/api/v1/', (req, res) => {
 //   res.status(200).json({
 //     message: 'all good',
