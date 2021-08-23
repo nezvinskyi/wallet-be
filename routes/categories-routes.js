@@ -4,20 +4,35 @@ const { categories: ctrl } = require('../controllers');
 
 /**
  * @swagger
+ *
  * /api/v1/categories:
  *  get:
  *    description: Use to get all categories
+ *    tags: [categories]
  *    responses:
  *      '200':
  *        description: A successful response
  */
-router.get('/', ctrl.getAll);
+router.get('/', ctrl.getAllCategories);
+
+/**
+ * @swagger
+ * /api/v1/categories/:categoryId:
+ *  get:
+ *    description: Use to get one category by categoryId
+ *    tags: [categories]
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
+router.get('/:categoryId', ctrl.getCategoryById);
 
 /**
  * @swagger
  * /api/v1/categories:
  *  post:
  *    description: Use to post one category
+ *    tags: [categories]
  *    responses:
  *      '200':
  *        description: A successful response
@@ -27,8 +42,21 @@ router.post('/', ctrl.addCategory);
 /**
  * @swagger
  * /api/v1/categories/:categoryId:
+ *  patch:
+ *    description: Use to patch one category by categoryId
+ *    tags: [categories]
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
+router.put('/:categoryId', ctrl.updateCategoryById);
+
+/**
+ * @swagger
+ * /api/v1/categories/:categoryId:
  *  delete:
- *    description: Use to post one category
+ *    description: Use to delete one category by categoryId
+ *    tags: [categories]
  *    responses:
  *      '200':
  *        description: A successful response

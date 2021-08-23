@@ -1,6 +1,6 @@
-const { Category } = require('../../model');
+const { Category } = require('../../models');
 
-const getAll = async (req, res) => {
+const getAllCategories = async (req, res) => {
   try {
     const result = await Category.find();
     res.status(200).json(result);
@@ -9,4 +9,4 @@ const getAll = async (req, res) => {
   }
 };
 
-module.exports = getAll;
+module.exports = getAllCategories;

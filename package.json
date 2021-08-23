@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "gravatar": "^1.8.2",
+    "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.7",
     "morgan": "^1.10.0",
