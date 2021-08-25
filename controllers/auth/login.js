@@ -1,20 +1,24 @@
 const moment = require('moment');
 const { user: service } = require('../../services');
-const { sessions: sesService } = require('../../services')
+const { sessions: sesService } = require('../../services');
 const jwtHelper = require('../../helpers/jwtHelper');
 const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log('email :>> ', email);
+  console.log('password  :>> ', password);
   try {
-    const user = await service.getOne({ email })
+    const user = await service.getOne({ email });
     if (!user || !user.comparePassword(password)) {
-      res.status(HTTP_STATUS.UNAUTHORIZED).json({
-        status: 'Error',
-        code: HTTP_STATUS.UNAUTHORIZED,
-        message: 'Email or password is wrong',
-      })
-    };
+      // res.status(HTTP_STATUS.UNAUTHORIZED).json({
+      //   status: 'Error',
+      //   code: HTTP_STATUS.UNAUTHORIZED,
+      //   message: 'Email or password is wrong',
+      // });
+      res.status(401);
+      throw new Error('Email or password is wrong');
+    }
     // const { JWT_SECRET } = process.env;
     // const payload = {
     //   id: user._id,
@@ -24,12 +28,12 @@ const login = async (req, res, next) => {
 
     // const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '2m' });
 
-    const accessToken = jwtHelper.getAccessToken(user._id)
-    const refreshToken = jwtHelper.getRefreshToken()
+    const accessToken = jwtHelper.getAccessToken(user._id);
+    const refreshToken = jwtHelper.getRefreshToken();
 
     // await service.updateById(accessToken.id, { token: accessToken.token });
 
-    // ===  star black list, add record of session  !!!!!!!! 
+    // ===  star black list, add record of session  !!!!!!!!
     // await sesService.addOne({
     //   userId: user._id,
     //   loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
@@ -45,10 +49,10 @@ const login = async (req, res, next) => {
         rToken: refreshToken.token,
         user: { email: user.email, name: user.name },
       },
-    })
-
+    });
   } catch (error) {
-    next(error)
+    next(error);
+    // res.status(error);
   }
 };
 

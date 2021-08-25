@@ -5,7 +5,7 @@ const { Session } = require('../models');
 
 const { JWT_SECRET } = process.env;
 
-const getAccessToken = (userId) => {
+const getAccessToken = userId => {
   const payload = {
     id: userId,
     type: 'access',
@@ -13,7 +13,7 @@ const getAccessToken = (userId) => {
   };
   return {
     id: payload.id,
-    token: jwt.sign(payload, JWT_SECRET, { expiresIn: '2m' })
+    token: jwt.sign(payload, JWT_SECRET, { expiresIn: '2d' }),
   };
 };
 

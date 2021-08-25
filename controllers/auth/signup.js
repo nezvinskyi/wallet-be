@@ -8,11 +8,6 @@ const signup = async (req, res, next) => {
   //убрал confirmPassword делаем валидацию на фронте
   const { name, email, password } = req.body;
 
-  console.log('{ name, email, password } :>> ', {
-    name,
-    email,
-    password,
-  });
   try {
     const user = await service.getOne({ email });
 
@@ -52,6 +47,7 @@ const signup = async (req, res, next) => {
       },
     });
   } catch (error) {
+    console.log(error.response);
     next(error);
   }
 };
