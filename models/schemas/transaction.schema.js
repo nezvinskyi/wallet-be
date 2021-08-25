@@ -3,9 +3,16 @@ const { Schema } = require('mongoose');
 const transactionSchema = Schema(
   {
     date: {
-      type: Date,
-      // `Date.now()` returns the current unix timestamp as a number
-      default: Date.now,
+      type: String,
+    },
+    year: {
+      type: String,
+    },
+    month: {
+      type: String,
+    },
+    day: {
+      type: String,
     },
     type: {
       type: String,
