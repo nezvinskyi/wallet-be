@@ -7,20 +7,27 @@ const addCategory = async (req, res, next) => {
       item => item.name.toLowerCase().trim() === req.body.name.toLowerCase().trim(),
     );
     if (item) {
-      res.status(404).json({
+      res.status(409).json({
         status: 'error',
-        code: 404,
-        message: `Category name "${item.name}" has user already, choose another name`,
+        code: 409,
+        message: `Category name "${item.name}" exists, choose another name`,
       });
       return;
     }
-    const categoryNorm = {
+    const categoryNameNormalized = {
       name: req.body.name.trim(),
     };
-    const result = await Category.create(categoryNorm);
-    res.status(201).json(result);
+    const result = await Category.create(categoryNameNormalized);
+    res.status(201).json({
+      status: 'success',
+      code: 201,
+      data: {
+        message: `Category was created`,
+        result,
+      },
+    });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    next(error);
   }
 };
 

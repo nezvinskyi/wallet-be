@@ -39,6 +39,16 @@ router.post('/', authMiddleware, ctrl.addTransaction);
  */
 router.delete('/:transactionId', ctrl.delTransaction);
 
+/**
+ * @swagger
+ * /api/v1/transactions/sum:
+ *  get:
+ *    description: Use to get sum
+ *    tags: [transactions]
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 router.get('/sum', authMiddleware, ctrl.getSum);
 
 module.exports = router;

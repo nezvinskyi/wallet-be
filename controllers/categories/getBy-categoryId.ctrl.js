@@ -25,9 +25,7 @@ const getCategoryById = async (req, res) => {
         message: "Item with this id doesn't exist",
       });
     }
-    res.status(404).json({
-      error: error.message,
-    });
+    next(error);
   }
 };
 

@@ -9,7 +9,7 @@ const categorySchema = Schema(
       minLength: [2, 'Name of category should be at least 2 characters'],
     },
   },
-  { versionKey: false, timestamps: false },
+  { versionKey: false, timestamps: true },
 );
 
 module.exports = categorySchema;

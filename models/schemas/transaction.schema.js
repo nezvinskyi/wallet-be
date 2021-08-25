@@ -33,7 +33,7 @@ const transactionSchema = Schema(
       default: 0,
     },
   },
-  { versionKey: false, timestamps: false },
+  { versionKey: false, timestamps: true },
 );
 
 module.exports = transactionSchema;
