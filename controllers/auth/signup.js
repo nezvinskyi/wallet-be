@@ -26,7 +26,7 @@ const signup = async (req, res, next) => {
     }
 
     const newUser = await service.addUser({ email, password, name });
-    const { _id } = newUser;
+    const { _id, avatarURL } = newUser;
 
     const accessToken = jwtHelper.getAccessToken(_id);
     const refreshToken = jwtHelper.getRefreshToken();
@@ -48,7 +48,7 @@ const signup = async (req, res, next) => {
       data: {
         token: accessToken.token,
         rToken: refreshToken.token,
-        user: { _id, email, name },
+        user: { _id, email, name, avatarURL },
       },
     });
   } catch (error) {
