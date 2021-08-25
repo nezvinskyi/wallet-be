@@ -15,7 +15,7 @@ const sessionSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true },
+  { timestamps: false },
 );
 
 

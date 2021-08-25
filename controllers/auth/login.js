@@ -29,12 +29,13 @@ const login = async (req, res, next) => {
 
     // await service.updateById(accessToken.id, { token: accessToken.token });
 
-    await sesService.addOne({
-      userId: user._id,
-      loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
-      tokenId: refreshToken.id,
-      usedToken: refreshToken.token,
-    });
+    // ===  star black list, add record of session  !!!!!!!! 
+    // await sesService.addOne({
+    //   userId: user._id,
+    //   loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
+    //   tokenId: refreshToken.id,
+    //   usedToken: refreshToken.token,
+    // });
 
     res.status(HTTP_STATUS.OK).json({
       status: 'Success',

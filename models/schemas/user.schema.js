@@ -22,11 +22,11 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'name is required'],
     },
-    token: {
-      //TODO: мы не храним токен в БД. только на клиенте в localStorage
-      type: String,
-      default: null,
-    },
+    // token: {
+    //TODO: мы не храним токен в БД. только на клиенте в localStorage
+    //   type: String,
+    //   default: null,
+    // },
     avatarURL: {
       type: String,
       default: function () {
