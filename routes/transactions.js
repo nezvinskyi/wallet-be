@@ -39,4 +39,6 @@ router.post('/', authMiddleware, ctrl.addTransaction);
  */
 router.delete('/:transactionId', ctrl.delTransaction);
 
+router.get('/sum', authMiddleware, ctrl.getSum);
+
 module.exports = router;

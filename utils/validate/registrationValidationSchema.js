@@ -5,7 +5,7 @@ const validationSchema = newUser => {
     name: Joi.string(),
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
     password: Joi.string().min(8).required(),
-    confirmPassword: Joi.string().required().valid(Joi.ref('password')),
+    // confirmPassword: Joi.string().required().valid(Joi.ref('password')),
   });
   const { error } = schema.validate(newUser);
   return error;

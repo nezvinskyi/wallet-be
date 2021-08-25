@@ -1,13 +1,20 @@
+const jwt = require('jsonwebtoken');
+
 const { user: service } = require('../../services');
 const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
 const signup = async (req, res, next) => {
-  const { name, email, password, confirmPassword } = req.body;
-  
-  console.log('{ name, email, password, confirmPassword } :>> ', { name, email, password, confirmPassword });
+  //убрал confirmPassword делаем валидацию на фронте
+  const { name, email, password } = req.body;
+
+  console.log('{ name, email, password } :>> ', {
+    name,
+    email,
+    password,
+  });
   try {
     const user = await service.getOne({ email });
-    
+
     if (user) {
       return res.status(HTTP_STATUS.CONFLICT).json({
         status: 'Error',
@@ -30,10 +37,18 @@ const signup = async (req, res, next) => {
     const newUser = await service.addUser({ email, password, name });
     const { _id } = newUser;
 
+    const { JWT_SECRET } = process.env;
+    const payload = {
+      id: _id,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET);
+
     res.status(HTTP_STATUS.CREATED).json({
       status: 'Success',
       code: HTTP_STATUS.CREATED,
       data: {
+        token,
         user: { _id, email, name },
       },
     });
