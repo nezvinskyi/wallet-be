@@ -67,7 +67,7 @@ router.patch('/', authMiddleware, ctrl.updateName);
 
 /**
  * @swagger
- * /api/v1/users:
+ * /api/v1/users/refresh:
  *  patch:
  *    description: Use to update jwt tokens
  *    tags: [Users]
