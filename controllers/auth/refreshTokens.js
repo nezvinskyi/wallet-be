@@ -19,7 +19,7 @@ const refreshTokens = async (req, res, next) => {
       res.status(HTTP_STATUS.BAD_REQUEST).json({
         status: 'Error',
         code: HTTP_STATUS.BAD_REQUEST,
-        message: 'Invalid token!'
+        message: 'Missing or invalid token!'
       });
       return;
     };
