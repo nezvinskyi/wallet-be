@@ -5,14 +5,7 @@ const authMiddleware = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, user) => {
     const token = req.get('Authorization');
     console.log('token bearer :>>', token)
-    if (error instanceof jwt.TokenExpiredError) {
-      res.status(HTTP_STATUS.BAD_REQUEST).json({
-        status: 'Error',
-        code: HTTP_STATUS.BAD_REQUEST,
-        message: 'Token expired!'
-      });
-      return;
-    } else if (error || !user || !token/* !user.token */) {
+    if (error || !user || !token/* !user.token */) {
       res.status(HTTP_STATUS.UNAUTHORIZED).json({
         status: 'Error',
         code: HTTP_STATUS.UNAUTHORIZED,

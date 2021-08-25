@@ -1,4 +1,6 @@
+const moment = require('moment');
 const { user: service } = require('../../services');
+const { sessions: sesService } = require('../../services')
 const jwtHelper = require('../../helpers/jwtHelper');
 const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
@@ -25,7 +27,14 @@ const login = async (req, res, next) => {
     const accessToken = jwtHelper.getAccessToken(user._id)
     const refreshToken = jwtHelper.getRefreshToken()
 
-    await service.updateById(accessToken.id, { token: accessToken.token });
+    // await service.updateById(accessToken.id, { token: accessToken.token });
+
+    await sesService.addOne({
+      userId: user._id,
+      loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
+      tokenId: refreshToken.id,
+      usedToken: refreshToken.token,
+    });
 
     res.status(HTTP_STATUS.OK).json({
       status: 'Success',

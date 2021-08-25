@@ -1,6 +1,6 @@
 const { model } = require('mongoose');
 const { sessionSchema } = require('./schemas');
 
-const SessionList = model('session', sessionSchema);
+const Session = model('session', sessionSchema);
 
-module.exports = SessionList;
+module.exports = Session;

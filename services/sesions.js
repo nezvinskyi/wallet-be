@@ -1,11 +1,11 @@
-const { SessionList } = require('../models');
+const { Session } = require('../models');
 
 const getOne = filter => {
-  return SessionList.findOne(filter);
+  return Session.findOne(filter);
 };
 
-const addOne = ({ userId, loginTime, tokenId, tokenType, usedToken }) => {
-  const newSession = new User({ userId, loginTime, tokenId, tokenType, usedToken });
+const addOne = ({ userId, loginTime, tokenId, usedToken }) => {
+  const newSession = new Session({ userId, loginTime, tokenId, usedToken });
   return newSession.save();
 };
 

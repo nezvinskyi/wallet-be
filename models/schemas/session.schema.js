@@ -11,9 +11,6 @@ const sessionSchema = new Schema(
     tokenId: {
       type: String,
     },
-    tokenType: {
-      type: String,
-    },
     usedToken: {
       type: String,
     },

@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { SessionList } = require('../models');
+const { Session } = require('../models');
 
 const { JWT_SECRET } = process.env;
 
@@ -29,14 +29,7 @@ const getRefreshToken = () => {
   };
 };
 
-const replaceDbRefreshToken = (tokenId, userId) => {
-  SessionList.findOneAndRemove({ userId })
-    .exec()
-    .then(() => SessionList.create({ tokenId, userId }));
-}
-
 module.exports = {
   getAccessToken,
   getRefreshToken,
-  replaceDbRefreshToken,
 };
