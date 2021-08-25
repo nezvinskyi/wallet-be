@@ -11,6 +11,9 @@ const transactionSchema = Schema(
     month: {
       type: String,
     },
+    day: {
+      type: String,
+    },
     type: {
       type: String,
       enum: ['income', 'expense'],
