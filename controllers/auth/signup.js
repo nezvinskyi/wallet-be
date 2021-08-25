@@ -1,13 +1,14 @@
+const jwtHelper = require('../../helpers/jwtHelper')
 const { user: service } = require('../../services');
 const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
 const signup = async (req, res, next) => {
   const { name, email, password, confirmPassword } = req.body;
-  
+
   console.log('{ name, email, password, confirmPassword } :>> ', { name, email, password, confirmPassword });
   try {
     const user = await service.getOne({ email });
-    
+
     if (user) {
       return res.status(HTTP_STATUS.CONFLICT).json({
         status: 'Error',
@@ -26,14 +27,19 @@ const signup = async (req, res, next) => {
     //   });
     // }
     // delete { confirmPassword }
+    const accessToken = jwtHelper.getAccessToken(user._id);
+    const refreshToken = jwtHelper.getRefreshToken();
 
     const newUser = await service.addUser({ email, password, name });
+    // await service.updateById(payload.id, { token });
     const { _id } = newUser;
 
     res.status(HTTP_STATUS.CREATED).json({
       status: 'Success',
       code: HTTP_STATUS.CREATED,
       data: {
+        token: accessToken.token,
+        rToken: refreshToken.token,
         user: { _id, email, name },
       },
     });

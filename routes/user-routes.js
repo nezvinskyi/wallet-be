@@ -65,4 +65,16 @@ router.get('/current', authMiddleware, ctrl.getCurrentUser);
  */
 router.patch('/', authMiddleware, ctrl.updateName);
 
+/**
+ * @swagger
+ * /api/v1/users:
+ *  patch:
+ *    description: Use to update jwt tokens
+ *    tags: [Users]
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
+router.get('/refresh', ctrl.refreshTokens);
+
 module.exports = router;
