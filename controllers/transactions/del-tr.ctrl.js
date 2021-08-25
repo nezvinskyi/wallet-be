@@ -9,7 +9,7 @@ const delTransaction = async (req, res) => {
       message: `Transaction with id ${req.params.transactionId} was deleted`,
     });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    next(error);
   }
 };
 

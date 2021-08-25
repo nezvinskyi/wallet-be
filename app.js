@@ -22,11 +22,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api/v1/transactions', transactionsRoutes);
 app.use('/api/v1/categories', categoriesRoutes);
 app.use('/api/v1/users', usersRoutes);
-// app.get('/api/v1/', (req, res) => {
-//   res.status(200).json({
-//     message: 'all good',
-//   });
-// });
 
 app.use(notFound);
 
