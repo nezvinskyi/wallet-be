@@ -3,7 +3,9 @@ const HTTP_STATUS = require('../helpers/httpStatusCodes');
 
 const authMiddleware = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, user) => {
-    if (error || !user || !user.token) {
+    const token = req.get('Authorization');
+    console.log('token bearer :>>', token)
+    if (error || !user || !token/* !user.token */) {
       res.status(HTTP_STATUS.UNAUTHORIZED).json({
         status: 'Error',
         code: HTTP_STATUS.UNAUTHORIZED,
@@ -13,7 +15,7 @@ const authMiddleware = (req, res, next) => {
     };
     req.user = user
     next()
-  })(req, res, next)
+  })(req, res, next);
 };
 
 module.exports = authMiddleware;

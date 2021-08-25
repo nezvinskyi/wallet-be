@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
-
+const moment = require('moment');
+const jwtHelper = require('../../helpers/jwtHelper');
 const { user: service } = require('../../services');
+const { sessions: sesService } = require('../../services');
 const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
 const signup = async (req, res, next) => {
@@ -24,31 +25,29 @@ const signup = async (req, res, next) => {
       });
     }
 
-    // if({ password } !== { confirmPassword }) {
-    //   return res.status(HTTP_STATUS.BAD_REQUEST).json({
-    //     status: 'Error',
-    //     code: HTTP_STATUS.BAD_REQUEST,
-    //     message: 'Password and Confirm Password should be same',
-    //     data: 'Passwords not match',
-    //   });
-    // }
-    // delete { confirmPassword }
-
     const newUser = await service.addUser({ email, password, name });
     const { _id } = newUser;
 
-    const { JWT_SECRET } = process.env;
-    const payload = {
-      id: _id,
-    };
+    const accessToken = jwtHelper.getAccessToken(_id);
+    const refreshToken = jwtHelper.getRefreshToken();
 
-    const token = jwt.sign(payload, JWT_SECRET);
+    console.log('newUser :>> ', newUser);
+    // await service.updateById(payload.id, { token });
+
+    // ===  star black list, add record of session !!!!!!!!!
+    // await sesService.addOne({
+    //   userId: user._id,
+    //   loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
+    //   tokenId: refreshToken.id,
+    //   usedToken: refreshToken.token,
+    // });
 
     res.status(HTTP_STATUS.CREATED).json({
       status: 'Success',
       code: HTTP_STATUS.CREATED,
       data: {
-        token,
+        token: accessToken.token,
+        rToken: refreshToken.token,
         user: { _id, email, name },
       },
     });
