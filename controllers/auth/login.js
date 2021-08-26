@@ -19,27 +19,20 @@ const login = async (req, res, next) => {
       res.status(401);
       throw new Error('Email or password is wrong');
     }
-    // const { JWT_SECRET } = process.env;
-    // const payload = {
-    //   id: user._id,
-    //   type: 'acces',
-    //   iat: Math.floor(Date.now() / 1000),
-    // };
-
-    // const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '2m' });
 
     const accessToken = jwtHelper.getAccessToken(user._id);
     const refreshToken = jwtHelper.getRefreshToken();
 
-    // await service.updateById(accessToken.id, { token: accessToken.token });
+    console.log('userId:>>', user._id)
 
-    // ===  star black list, add record of session  !!!!!!!!
-    // await sesService.addOne({
-    //   userId: user._id,
-    //   loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
-    //   tokenId: refreshToken.id,
-    //   usedToken: refreshToken.token,
-    // });
+    // ===  start black list, add record of session  !!!!!!!!
+    await sesService.addOne({
+      userId: user._id,
+      loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
+      tokenId: refreshToken.id,
+      usedToken: refreshToken.token,
+      accessToken: accessToken.token,
+    });
 
     res.status(HTTP_STATUS.OK).json({
       status: 'Success',

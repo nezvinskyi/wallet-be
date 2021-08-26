@@ -27,15 +27,15 @@ const signup = async (req, res, next) => {
     const refreshToken = jwtHelper.getRefreshToken();
 
     console.log('newUser :>> ', newUser);
-    // await service.updateById(payload.id, { token });
 
-    // ===  star black list, add record of session !!!!!!!!!
-    // await sesService.addOne({
-    //   userId: user._id,
-    //   loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
-    //   tokenId: refreshToken.id,
-    //   usedToken: refreshToken.token,
-    // });
+    // ===  start black list, add record of session !!!!!!!!!
+    await sesService.addOne({
+      userId: user._id,
+      loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
+      tokenId: refreshToken.id,
+      usedToken: refreshToken.token,
+      accessToken: accessToken.token,
+    });
 
     res.status(HTTP_STATUS.CREATED).json({
       status: 'Success',

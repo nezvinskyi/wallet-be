@@ -8,14 +8,24 @@ const sessionSchema = new Schema(
     loginTime: {
       type: String,
     },
+    logoutTime: {
+      type: String,
+    },
     tokenId: {
       type: String,
     },
     usedToken: {
       type: String,
     },
+    validToken: {
+      type: Boolean,
+      default: true,
+    },
+    accessToken: {
+      type: String,
+    },
   },
-  { timestamps: false },
+  { versionKey: false, timestamps: false },
 );
 
 
