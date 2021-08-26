@@ -2,7 +2,10 @@ const { Transaction } = require('../../models');
 
 const getAllTransactions = async (req, res, next) => {
   try {
-    const result = await Transaction.find({ userId: req.user._id });
+    const result = await Transaction.find({ userId: req.user._id }).populate({
+      path: 'categoryId',
+      select: 'name -_id',
+    });
 
     if (result?.length === 0) {
       res.status(200).json({
