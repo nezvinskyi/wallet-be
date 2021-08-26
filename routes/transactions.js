@@ -49,6 +49,6 @@ router.delete('/:transactionId', ctrl.delTransaction);
  *      '200':
  *        description: A successful response
  */
-router.get('/sum', authMiddleware, ctrl.getSum);
+router.get('/balance', authMiddleware, ctrl.getBalance);
 
 module.exports = router;
