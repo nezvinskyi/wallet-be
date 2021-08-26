@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { Session } = require('../models');
+
 
 const { JWT_SECRET } = process.env;
 
