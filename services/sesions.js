@@ -4,8 +4,12 @@ const getOne = filter => {
   return Session.findOne(filter);
 };
 
-const addOne = ({ userId, loginTime, tokenId, usedToken }) => {
-  const newSession = new Session({ userId, loginTime, tokenId, usedToken });
+const takeOne = (filter, field) => {
+  return Session.findOne(filter, field);
+};
+
+const addOne = ({ userId, loginTime, tokenId, usedToken, accessToken }) => {
+  const newSession = new Session({ userId, loginTime, tokenId, usedToken, accessToken });
   return newSession.save();
 };
 
@@ -17,4 +21,5 @@ module.exports = {
   getOne,
   addOne,
   updateById,
+  takeOne,
 };
