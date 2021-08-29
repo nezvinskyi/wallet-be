@@ -33,7 +33,7 @@ const transactionSchema = Schema(
     },
     comments: {
       type: String,
-      minLength: [2, 'Name of category should be at least 2 characters'],
+      minLength: [2, 'Comment should be at least 2 characters'],
     },
     amount: {
       type: Number,
