@@ -30,8 +30,9 @@ const signup = async (req, res, next) => {
 
     // ===  start black list, add record of session !!!!!!!!!
     await sesService.addOne({
-      userId: user._id,
-      loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
+      // TODO закомментил след строку. ошибка при регистрации. cannot find _id of undefined
+      // userId: user._id,
+      loginTime: moment(new Date()).format('HH-mm-ss, YYYY-MM-DD'),
       tokenId: refreshToken.id,
       usedToken: refreshToken.token,
       accessToken: accessToken.token,
@@ -47,7 +48,7 @@ const signup = async (req, res, next) => {
       },
     });
   } catch (error) {
-    console.log(error.response);
+    console.log(error.response || error);
     next(error);
   }
 };
