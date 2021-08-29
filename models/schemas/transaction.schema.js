@@ -3,7 +3,7 @@ const { Schema } = require('mongoose');
 const transactionSchema = Schema(
   {
     date: {
-      type: String,
+      type: Date,
     },
     year: {
       type: String,
