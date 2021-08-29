@@ -5,7 +5,9 @@ const addTransaction = async (req, res, next) => {
   try {
     const tr = {
       ...req.body,
-      date: moment(req.body.date).format('YYYY-MM-DD'),
+      date: `${moment(req.body.date).format('YYYY-MM-DD')}T${moment(Date.now()).format(
+        'HH:mm:ss',
+      )}.000+00:00`,
       year: moment(req.body.date).format('YYYY'),
       month: moment(req.body.date).format('MM'),
       day: moment(req.body.date).format('DD'),
