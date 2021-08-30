@@ -22,7 +22,6 @@ const transactionSchema = Schema(
     categoryId: {
       type: Schema.Types.ObjectId,
       ref: 'category',
-      required: true,
     },
     userId: {
       type: Schema.Types.ObjectId,
@@ -33,11 +32,11 @@ const transactionSchema = Schema(
     },
     comments: {
       type: String,
-      minLength: [2, 'Comment should be at least 2 characters'],
     },
     amount: {
       type: Number,
       default: 0,
+      required: true,
     },
   },
   { versionKey: false, timestamps: true },
