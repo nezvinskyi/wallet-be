@@ -4,7 +4,6 @@ const { sessions: sesService } = require('../services');
 const sessionEnd = async (token) => {
   const session = await sesService.getOne({ usedToken: token });
   const { _id } = session;
-  console.log(_id);
 
   await sesService.updateById(_id,
     {

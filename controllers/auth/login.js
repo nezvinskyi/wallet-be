@@ -6,16 +6,9 @@ const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  console.log('email :>> ', email);
-  console.log('password  :>> ', password);
   try {
     const user = await service.getOne({ email });
     if (!user || !user.comparePassword(password)) {
-      // res.status(HTTP_STATUS.UNAUTHORIZED).json({
-      //   status: 'Error',
-      //   code: HTTP_STATUS.UNAUTHORIZED,
-      //   message: 'Email or password is wrong',
-      // });
       res.status(401);
       throw new Error('Email or password is wrong');
     }
@@ -25,7 +18,7 @@ const login = async (req, res, next) => {
 
     console.log('userId:>>', user._id)
 
-    // ===  start black list, add record of session  !!!!!!!!
+    // ===  record of session ===
     await sesService.addOne({
       userId: user._id,
       loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
@@ -45,7 +38,6 @@ const login = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-    // res.status(error);
   }
 };
 

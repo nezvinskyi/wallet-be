@@ -13,19 +13,8 @@ const refreshTokens = async (req, res, next) => {
   const { email } = req.body;
   const user = await service.getOne({ email })
   const token = req.get('Authorization').replace(/^Bearer\s+/, "");
-  console.log(token)
 
-  // const session = await sesService.getOne({ usedToken: refreshToken });
-  // const { _id } = session;
-  // console.log(_id)
-  // await sesService.updateById(_id,
-  //   {
-  //     validToken: false,
-  //     logoutTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD')
-  //   }
-  // );
-
-  await sessionEnd(token)
+  await sessionEnd(token);
 
   try {
     const payload = jwt.verify(token, JWT_SECRET);
@@ -41,6 +30,7 @@ const refreshTokens = async (req, res, next) => {
 
     const accessToken = jwtHelper.getAccessToken(user._id);
 
+    // === record new session ===
     await sesService.addOne({
       userId: user._id,
       loginTime: moment(new Date).format('HH-mm-ss, YYYY-MM-DD'),
@@ -49,7 +39,6 @@ const refreshTokens = async (req, res, next) => {
       accessToken: accessToken.token,
     });
 
-    // console.log(accessToken)
     res.status(HTTP_STATUS.OK).json({
       status: 'Success',
       code: HTTP_STATUS.OK,

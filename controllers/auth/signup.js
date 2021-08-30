@@ -5,7 +5,6 @@ const { sessions: sesService } = require('../../services');
 const HTTP_STATUS = require('../../helpers/httpStatusCodes');
 
 const signup = async (req, res, next) => {
-  //убрал confirmPassword делаем валидацию на фронте
   const { name, email, password } = req.body;
 
   try {
@@ -26,12 +25,9 @@ const signup = async (req, res, next) => {
     const accessToken = jwtHelper.getAccessToken(_id);
     const refreshToken = jwtHelper.getRefreshToken();
 
-    console.log('newUser :>> ', newUser);
-
-    // ===  start black list, add record of session !!!!!!!!!
+    // ===  add record of session ===
     await sesService.addOne({
-      // TODO закомментил след строку. ошибка при регистрации. cannot find _id of undefined
-      // userId: user._id,
+      // userId: newUser._id,
       loginTime: moment(new Date()).format('HH-mm-ss, YYYY-MM-DD'),
       tokenId: refreshToken.id,
       usedToken: refreshToken.token,

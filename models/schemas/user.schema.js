@@ -8,11 +8,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required'],
     },
-    // Это тут не нужно писать. Ты это не передаешь в БД
-    // confirmPassword: {
-    //   type: String,
-    //   required: [true, 'Confirmation of password is required'],
-    // },
     email: {
       type: String,
       required: [true, 'Email is required'],
@@ -22,11 +17,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'name is required'],
     },
-    // token: {
-    //TODO: мы не храним токен в БД. только на клиенте в localStorage
-    //   type: String,
-    //   default: null,
-    // },
     avatarURL: {
       type: String,
       default: function () {
