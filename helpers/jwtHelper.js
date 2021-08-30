@@ -13,7 +13,7 @@ const getAccessToken = userId => {
   };
   return {
     id: payload.id,
-    token: jwt.sign(payload, JWT_SECRET, { expiresIn: '2d' }),
+    token: jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' }),
   };
 };
 

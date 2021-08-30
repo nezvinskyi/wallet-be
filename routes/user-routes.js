@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const router = Router();
-const { authMiddleware, validateMiddleware } = require('../middlewares');
+const { authMiddleware, validateMiddleware, authRefreshMiddleware } = require('../middlewares');
 const { registrationSchema, loginSchema } = require('../utils/validate');
-const authRefresh = require('../middlewares/authRefresh')
 
 const { user: ctrl } = require('../controllers');
 
@@ -76,6 +75,6 @@ router.patch('/', authMiddleware, ctrl.updateName);
  *      '200':
  *        description: A successful response
  */
-router.get('/refresh', authRefresh, ctrl.refreshTokens);
+router.get('/refresh', authRefreshMiddleware, ctrl.refreshTokens);
 
 module.exports = router;

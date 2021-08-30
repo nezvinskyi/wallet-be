@@ -1,12 +1,9 @@
 const moment = require('moment');
 const { sessions: sesService } = require('../../services');
-// const sessionEnd = require('../../helpers/sessionEndHelper')
-// const { user: Service } = require('../../services');
 
 const logout = async (req, res, next) => {
   try {
     const accessToken = req.get('Authorization').replace(/^Bearer\s+/, "");
-    // console.log(accessToken)
     const session = await sesService.getOne({ accessToken });
     const { _id } = session;
     console.log(_id);
