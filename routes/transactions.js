@@ -30,6 +30,18 @@ router.post('/', authMiddleware, ctrl.addTransaction);
 /**
  * @swagger
  * /api/v1/transactions/:transactionId:
+ *  put:
+ *    description: Use to update delete user transaction
+ *    tags: [transactions]
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
+router.put('/:transactionId', authMiddleware, ctrl.updateTransaction);
+
+/**
+ * @swagger
+ * /api/v1/transactions/:transactionId:
  *  delete:
  *    description: Use to delete one transaction by id
  *    tags: [transactions]
@@ -37,7 +49,7 @@ router.post('/', authMiddleware, ctrl.addTransaction);
  *      '200':
  *        description: A successful response
  */
-router.delete('/:transactionId', ctrl.delTransaction);
+router.delete('/:transactionId', authMiddleware, ctrl.delTransaction);
 
 /**
  * @swagger
