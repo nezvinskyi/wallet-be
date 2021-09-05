@@ -2,7 +2,7 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Contacts API',
+      title: 'Wallet API',
       version: '1.0.0',
       description: 'Wallet API information',
       contact: {
@@ -11,7 +11,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:5000',
+        url: 'https://wallet-app-767team.herokuapp.com/',
       },
     ],
   },
